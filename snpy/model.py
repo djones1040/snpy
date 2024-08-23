@@ -630,7 +630,7 @@ class EBV_model2(model):
    not a parameter, but is controled by the choice of calibration
    R_V for the galactic extinction is taken from the SN object (default 3.1).'''
 
-   def __init__(self, parent, stype='st'):
+   def __init__(self, parent, stype='st', RVhost=None):
 
       if stype not in ['dm15','st']:
          raise ValueError("This model only supports the dm15 and st parameter")
@@ -649,6 +649,9 @@ class EBV_model2(model):
       else:
          self.a,self.ea,self.b,self.eb,self.c,self.ec,self.Rv_host, self.eRv_host,self.sigSN = read_table(os.path.join(base,'dm15_calibration2.dat'))
 
+      if RVhost is not None:
+         self.Rv_host[0] = RVhost
+         
       self.do_Robs = 0
       self.Robs = {}
 
